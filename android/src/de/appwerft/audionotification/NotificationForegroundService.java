@@ -28,6 +28,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.support.v4.app.*;
+import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
 public class NotificationForegroundService extends Service {
@@ -40,7 +41,7 @@ public class NotificationForegroundService extends Service {
 	private KrollDict notificationOpts = new KrollDict();
 	private long when = 0;
 	private boolean isOreo;
-	
+
 
 	public NotificationForegroundService() {
 		super();
@@ -136,12 +137,12 @@ public class NotificationForegroundService extends Service {
 					 * , Constants.NOTIFICATION.CHANNELID
 					 */);
 		notificationBuilder //
-		.setSound(null)		
+		.setSound(null)
 		.setAutoCancel(true).setSmallIcon(R("applogo", "drawable"))//
 				.setDefaults(0).setPriority(Notification.PRIORITY_HIGH) //
 				.setWhen(when).setOngoing(true).setContentTitle(notificationOpts.getString(TiC.PROPERTY_TITLE))
 				.setContentText(notificationOpts.getString(TiC.PROPERTY_SUBTITLE)).setContentIntent(getPendingIntent());
-		
+
 		// Set the Channel ID for Android O.
 		Log.d(LCAT, "getNotification adding ChannelId");
 		if (TiaudionotificationModule.		isOreo) {
